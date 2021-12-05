@@ -5,10 +5,10 @@ interface IRequest {
   email: string;
 }
 
-class CreateUserUseCases {
+class CreateUserUseCase {
   constructor(private userRepositories: IUserRepositories) {}
 
-  execute({ name, email }: IRequest) {
+  public execute({ name, email }: IRequest) {
     const userAlreadyExists = this.userRepositories.findByEmail(email);
 
     if (userAlreadyExists) {
@@ -19,4 +19,4 @@ class CreateUserUseCases {
   }
 }
 
-export { CreateUserUseCases };
+export { CreateUserUseCase };

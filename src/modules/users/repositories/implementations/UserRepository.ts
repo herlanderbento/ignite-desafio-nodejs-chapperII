@@ -17,34 +17,38 @@ class UserRepository implements IUserRepositories {
     return UserRepository.INSTANCE;
   }
 
-  findById(id: string): User {
-    return this.users.find((user) => user.id === id);
-  }
-
-  findByEmail(email: string): User {
-    return this.users.find((user) => user.email === email);
-  }
-
-  turnAdmin(admin: boolean): User {
-    throw new Error("Method not implemented.");
-  }
-
-  list(): User[] {
-    return this.users;
-  }
-
-  create({ name, email }: ICreateUserDTO): void {
+  public create({ name, email }: ICreateUserDTO): void {
     const user = new User();
 
     Object.assign(user, {
       name,
       email,
-      admin: false,
       created_at: new Date(),
       updated_at: new Date(),
     });
 
     this.users.push(user);
+  }
+
+  public list(): User[] {
+    return this.users;
+  }
+
+  public findById(id: string): User | undefined {
+    return this.users.find((user) => user.id === id);
+  }
+
+  public findByEmail(email: string): User | undefined {
+    return this.users.find((user) => user.email === email);
+  }
+
+  public turnAdmin(admin: User): User {
+    const user = admin;
+
+    user.admin = true;
+    user.updated_at = new Date();
+
+    return user;
   }
 }
 
