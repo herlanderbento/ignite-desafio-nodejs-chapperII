@@ -41,6 +41,7 @@ class UserRepository implements IUserRepositories {
       email,
       admin: false,
       created_at: new Date(),
+      updated_at: new Date(),
     });
 
     this.users.push(user);
