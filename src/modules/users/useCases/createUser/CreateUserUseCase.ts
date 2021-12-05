@@ -1,3 +1,4 @@
+import { AppError } from "../../../../error/AppError";
 import { IUserRepositories } from "../../repositories/IUserRepositories";
 
 interface IRequest {
@@ -12,7 +13,7 @@ class CreateUserUseCase {
     const userAlreadyExists = this.userRepositories.findByEmail(email);
 
     if (userAlreadyExists) {
-      throw new Error(" User already exits!");
+      throw new AppError(" User already exits!", 404);
     }
 
     this.userRepositories.create({ name, email });
