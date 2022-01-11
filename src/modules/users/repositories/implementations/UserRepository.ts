@@ -45,7 +45,7 @@ class UserRepository implements IUserRepositories {
   public turnAdmin(admin: User): User {
     const user = admin;
 
-    user.admin = true;
+    user.admin = !user.admin;
     user.updated_at = new Date();
 
     return user;
